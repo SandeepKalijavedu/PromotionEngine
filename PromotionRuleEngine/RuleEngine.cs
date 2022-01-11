@@ -1,4 +1,5 @@
-﻿using PromotionRuleEngine.Core.Models;
+﻿using PromotionRuleEngine.Common;
+using PromotionRuleEngine.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,53 +9,35 @@ namespace PromotionRuleEngine
 {
     public class RuleEngine
     {
-        private readonly IEnumerable<Product> Products;
-        private readonly IEnumerable<PromotionRule> PromotionRules;
+        private readonly IList<Product> Products;
+        private readonly IList<PromotionRule> PromotionRules;
+        private readonly IList<IPromotionDiscount> promotionDiscounts;
 
-        public RuleEngine(IEnumerable<Product> products, IEnumerable<PromotionRule> promotionRules)
+        public RuleEngine(IList<Product> products, IList<PromotionRule> promotionRules, IList<IPromotionDiscount> promotionDiscounts)
         {
             this.Products = products;
             this.PromotionRules = promotionRules;
+            this.promotionDiscounts = promotionDiscounts;
         }
 
         public void CheckOutCartItems(Order order)
-        {
-            var promotionRulesForOrder = getPromotionRulesForOrder(order);
-            calculatePriceForOrder(order);
-            applyPromotion(order, promotionRulesForOrder);
-        }
-
-        private void applyPromotion(Order order, IList<PromotionRule> promotionRulesForOrder)
-        {
-            throw new NotImplementedException();
-        }       
-
-        private void calculatePriceForOrder(Order order)
-        {
-            foreach (var item in order.CartItems)
-            {
-                var itemPrice = Products.FirstOrDefault(x => x.Id == item.Id).Price;
-                var quantity = item.Quantity;
-                if (quantity > 0)
-                    order.TotalAmt += quantity * itemPrice;
-            }
-        }
-
-        private IList<PromotionRule> getPromotionRulesForOrder(Order order)
         {            
 
-            var rules = new List<PromotionRule>();
-
-            Parallel.ForEach(order.CartItems, cartItem =>
+            foreach (CartItem item in order.CartItems)
             {
-                var rule = PromotionRules.Where(pr => pr.CartItems.Any(c => c.Id == cartItem.Id));
-                if (rule != null)
+                if (item.Quantity > 0)
                 {
-                    rules.AddRange(rule);
+                    foreach (var promotionDiscount in promotionDiscounts)
+                    {
+                        if (promotionDiscount.CanExecute(item, PromotionRules))
+                        {
+                            var finalItemPrice = promotionDiscount.CalculateDiscount(order, PromotionRules, Products);
+                            order.TotalAmt += finalItemPrice;
+                            break;
+                        }
+                    }
                 }
-            });
-            return rules;
+            }
         }
-
     }
 }
