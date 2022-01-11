@@ -1,0 +1,10 @@
+C:\Users\sakalija\source\TestProject\PromotionRuleEngine.Core\bin\Debug\netcoreapp3.1\PromotionRuleEngine.Core.deps.json
+C:\Users\sakalija\source\TestProject\PromotionRuleEngine.Core\bin\Debug\netcoreapp3.1\PromotionRuleEngine.Core.dll
+C:\Users\sakalija\source\TestProject\PromotionRuleEngine.Core\bin\Debug\netcoreapp3.1\PromotionRuleEngine.Core.pdb
+C:\Users\sakalija\source\TestProject\PromotionRuleEngine.Core\obj\Debug\netcoreapp3.1\PromotionRuleEngine.Core.csproj.AssemblyReference.cache
+C:\Users\sakalija\source\TestProject\PromotionRuleEngine.Core\obj\Debug\netcoreapp3.1\PromotionRuleEngine.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sakalija\source\TestProject\PromotionRuleEngine.Core\obj\Debug\netcoreapp3.1\PromotionRuleEngine.Core.AssemblyInfoInputs.cache
+C:\Users\sakalija\source\TestProject\PromotionRuleEngine.Core\obj\Debug\netcoreapp3.1\PromotionRuleEngine.Core.AssemblyInfo.cs
+C:\Users\sakalija\source\TestProject\PromotionRuleEngine.Core\obj\Debug\netcoreapp3.1\PromotionRuleEngine.Core.csproj.CoreCompileInputs.cache
+C:\Users\sakalija\source\TestProject\PromotionRuleEngine.Core\obj\Debug\netcoreapp3.1\PromotionRuleEngine.Core.dll
+C:\Users\sakalija\source\TestProject\PromotionRuleEngine.Core\obj\Debug\netcoreapp3.1\PromotionRuleEngine.Core.pdb
