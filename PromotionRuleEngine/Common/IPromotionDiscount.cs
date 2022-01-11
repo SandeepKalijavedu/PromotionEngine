@@ -8,6 +8,6 @@ namespace PromotionRuleEngine.Common
     public interface IPromotionDiscount
     {
         public bool CanExecute(CartItem item, IList<PromotionRule> promotionRulesForOrder);
-        public double CalculateDiscount(Order order, IList<PromotionRule> promotionRulesForOrder, IList<Product> products);
+        public double CalculateDiscount(ref Order order, IList<PromotionRule> promotionRulesForOrder, IList<Product> products);
     }
 }

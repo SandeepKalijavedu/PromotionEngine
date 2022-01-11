@@ -11,14 +11,20 @@ namespace PromotionRuleEngine.PromotionDiscountTypes
     {
         private PromotionRule promotionRule;
         List<CartItem> cartItems;
-
-        public double CalculateDiscount(Order order, IList<PromotionRule> promotionRulesForOrder, IList<Product> products)
+        private CartItem cartItem;
+        public double CalculateDiscount(ref Order order, IList<PromotionRule> promotionRulesForOrder, IList<Product> products)
         {
             cartItems = new List<CartItem>();
 
             double finalPrice = 0;
-
-            cartItems = order.CartItems;
+            string[] str = promotionRule.ProductCode.Split(';').ToArray();
+            foreach (CartItem item in order.CartItems)
+            {
+                if (str.Contains(item.Id.ToString()))
+                {
+                    cartItems.Add(item);
+                }
+            }
 
             int quantity_first = 0;
             int quantity_second = 0;
@@ -26,9 +32,14 @@ namespace PromotionRuleEngine.PromotionDiscountTypes
             {
                 quantity_first = cartItems[0].Quantity;
                 quantity_second = cartItems[1].Quantity;
-            }              
-                
-                
+            }
+
+            if (quantity_first == 0 || quantity_second == 0)
+            {
+                var cartItemPrice = products.FirstOrDefault(x => x.Id == cartItem.Id).Price;
+                return cartItemPrice;
+            }
+            
             if (quantity_first == quantity_second)
             {
                 finalPrice = promotionRule.Price * quantity_first;
@@ -46,11 +57,17 @@ namespace PromotionRuleEngine.PromotionDiscountTypes
                 finalPrice = (cartItemPrice * additionalItems) + (promotionRule.Price * quantity_first);
             }
 
+            foreach (var item in cartItems)
+            {
+                order.CartItems.Find(x => x.Id == item.Id).Quantity = 0;
+            }
+
             return finalPrice;
         }
 
         public bool CanExecute(CartItem item, IList<PromotionRule> promotionRulesForOrder)
         {
+            cartItem = item;
             promotionRule = promotionRulesForOrder.Where(x => x.ProductCode.Split(';').Contains(item.Id.ToString())).FirstOrDefault();
             if (promotionRule != null && promotionRule.Type == PromotionType.Combo)
             {

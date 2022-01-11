@@ -7,6 +7,8 @@ namespace PromotionRuleEngine.Core.Models
 {
     public class CartItem : IEntity
     {
+        public CartItem() { }
+
         public CartItem(CartItem item)
         {
             Id = item.Id;
@@ -15,5 +17,6 @@ namespace PromotionRuleEngine.Core.Models
 
         public char Id { get; set; }
         public int Quantity { get; set; }
+        public double FinalPrice { get; set; }
     }
 }

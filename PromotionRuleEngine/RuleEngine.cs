@@ -20,8 +20,9 @@ namespace PromotionRuleEngine
             this.promotionDiscounts = promotionDiscounts;
         }
 
-        public void CheckOutCartItems(Order order)
-        {            
+        public double CheckOutCartItems(Order order)
+        {
+            Order appliedPromotionOffer = new Order();
 
             foreach (CartItem item in order.CartItems)
             {
@@ -31,13 +32,16 @@ namespace PromotionRuleEngine
                     {
                         if (promotionDiscount.CanExecute(item, PromotionRules))
                         {
-                            var finalItemPrice = promotionDiscount.CalculateDiscount(order, PromotionRules, Products);
-                            order.TotalAmt += finalItemPrice;
+                            item.FinalPrice = promotionDiscount.CalculateDiscount(ref order, PromotionRules, Products);
+                            appliedPromotionOffer.TotalAmt += item.FinalPrice;
                             break;
                         }
                     }
                 }
             }
+            //appliedPromotionOffer.CartItems = order.CartItems;
+
+            return appliedPromotionOffer.TotalAmt;
         }
     }
 }
