@@ -14,11 +14,19 @@ namespace PromotionRuleEngine.PromotionDiscountTypes
 
         public double CalculateDiscount(ref Order order, IList<PromotionRule> promotionRulesForOrder, IList<Product> products)
         {
-            int totalEligibleItems = cartItem.Quantity / promotionRule.Quantity;
-            int remainingItems = cartItem.Quantity % promotionRule.Quantity;
-            var itemPrice = products.FirstOrDefault(x => x.Id == cartItem.Id).Price;
-            var finalPrice = promotionRule.Price * totalEligibleItems + remainingItems * (itemPrice);
-            order.CartItems.Find(x => x.Id == cartItem.Id).Quantity = 0;
+            double finalPrice = 0;
+            try
+            {
+                int totalEligibleItems = cartItem.Quantity / promotionRule.Quantity;
+                int remainingItems = cartItem.Quantity % promotionRule.Quantity;
+                var itemPrice = products.FirstOrDefault(x => x.Id == cartItem.Id).Price;
+                finalPrice = promotionRule.Price * totalEligibleItems + remainingItems * (itemPrice);
+                order.CartItems.Find(x => x.Id == cartItem.Id).Quantity = 0;
+            }
+            catch(Exception exception)
+            {
+                throw new Exception("QuantityDiscountPromotionException", exception);
+            }
             return finalPrice;
         }
 
