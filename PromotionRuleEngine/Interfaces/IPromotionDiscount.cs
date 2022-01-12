@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PromotionRuleEngine.Common
+namespace PromotionRuleEngine.Interfaces
 {
     public interface IPromotionDiscount
     {

@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PromotionRuleEngine.Common;
 using PromotionRuleEngine.Core.Models;
+using PromotionRuleEngine.Core.Models.Common;
+using PromotionRuleEngine.Interfaces;
 using PromotionRuleEngine.PromotionDiscountTypes;
 using System.Collections.Generic;
 
@@ -21,21 +22,21 @@ namespace PromotionRuleEngineTests
           new List<PromotionRule> {
               new PromotionRule {
                    PromotionId = 1,
-                   Type = PromotionRuleEngine.Common.PromotionType.Quantity,
+                   Type = PromotionType.Quantity,
                    ProductCode = "A",
                    Quantity = 3,
                    Price = 130,
               },
               new PromotionRule {
                    PromotionId = 2,
-                   Type = PromotionRuleEngine.Common.PromotionType.Quantity,
+                   Type = PromotionType.Quantity,
                    ProductCode = "B",
                    Quantity = 2,
                    Price = 45,
               },
               new PromotionRule {
                    PromotionId = 3,
-                   Type = PromotionRuleEngine.Common.PromotionType.Combo,
+                   Type = PromotionType.Combo,
                    ProductCode = "C;D",
                    Quantity = 2,
                    Price = 30,

@@ -1,4 +1,4 @@
-﻿using PromotionRuleEngine.Common;
+﻿using PromotionRuleEngine.Interfaces;
 using PromotionRuleEngine.Core.Models;
 using System;
 using System.Collections.Generic;

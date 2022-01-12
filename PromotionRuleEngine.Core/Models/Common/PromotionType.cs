@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PromotionRuleEngine.Common
+namespace PromotionRuleEngine.Core.Models.Common
 {
     public enum PromotionType
     {

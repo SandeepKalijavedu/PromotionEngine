@@ -1,9 +1,10 @@
-﻿using PromotionRuleEngine.Common;
+﻿using PromotionRuleEngine.Interfaces;
 using PromotionRuleEngine.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PromotionRuleEngine.Core.Models.Common;
 
 namespace PromotionRuleEngine.PromotionDiscountTypes
 {
