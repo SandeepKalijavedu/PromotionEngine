@@ -25,6 +25,7 @@ namespace PromotionRuleEngine.PromotionDiscountTypes
             }
             catch(Exception exception)
             {
+                //TODO:  Add feature logging by injecting logger in consutructor
                 throw new Exception("QuantityDiscountPromotionException", exception);
             }
             return finalPrice;
